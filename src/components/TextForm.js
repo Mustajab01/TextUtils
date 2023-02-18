@@ -3,14 +3,28 @@ import React, {useState} from 'react'
 
 
 export default function TextForm(props) {
-    const handleUPCLick =()=>{
+    const handleUPClick =()=>{
         let newText = text.toUpperCase()
         setText(newText)
     }
-    const handleLcCLick =()=>{
+    const handleLcClick =()=>{
         let newText = text.toLowerCase()
         setText(newText)
     }
+    const handleClearClick =()=>{
+        let newText = ""
+        setText(newText)
+    }
+
+    const handleCapitalizeClick =()=>{
+        const words = text.split(" ");
+        for (let i = 0; i < words.length; i++) {
+            words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+        }  
+        setText(words.join(" "));
+    }
+
+
 
     const handleOnChange =(event)=>{
         setText(event.target.value)
@@ -25,8 +39,10 @@ export default function TextForm(props) {
             <div className="mb-3">
                 <textarea className="form-control" value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea>
             </div>
-            <button className="btn btn-primary mx-2" onClick={handleUPCLick}>Convert to Uppercase</button>
-            <button className="btn btn-primary mx-2" onClick={handleLcCLick}>Convert to Lowercase</button>
+            <button className="btn btn-primary mx-2" onClick={handleUPClick}>Convert to Uppercase</button>
+            <button className="btn btn-primary mx-2" onClick={handleLcClick}>Convert to Lowercase</button>
+            <button className="btn btn-primary mx-2" onClick={handleCapitalizeClick}>Capitalize</button>
+            <button className="btn btn-primary mx-2" onClick={handleClearClick}>Clear Text</button>
 
         </div>
         <div className="container my-3">
